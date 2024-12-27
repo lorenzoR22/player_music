@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reproductor de musica</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <script>
+        // Función para cambiar la fuente del audio en el reproductor
+        function reproducirCancion(id) {
+            const reproductor = document.getElementById('audio-player');
+            // Cambia la fuente del reproductor de audio al archivo de la canción seleccionada
+            reproductor.src = '/reproducir/' + id;
+            // Reproduce la canción
+            reproductor.play();
+        }
+    </script>
+
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Reproductor de musica</h1>
+    <br>
+    <div class="text-center mb-4">
+        <audio id="audio-player" controls>
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+    <table class="table table-bordered table-dark mt-5">
+        <thead>
+        <tr>
+            <th scope="col">Canción</th>
+            <th scope="col">Artista</th>
+            <th scope="col">Duración</th>
+            <th scope="col">Reproducir</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cancion : ${canciones}">
+            <th scope="row" th:text="${cancion.nombre}"></th>
+            <td th:text="${cancion.nombre_artista}"></td>
+            <td th:text="${cancion.duracion}"></td>
+            <td>
+                <button class="btn btn-success" th:onclick="'reproducirCancion(' + ${cancion.id} + ')'" type="button">
+                    <i class="fas fa-play"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
